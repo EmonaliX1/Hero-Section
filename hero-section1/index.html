@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero section 1 </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="backgroundImage"></div>
+    <nav>
+        <div class="leftSide">
+            <div class="website-Logo">
+               <i class="fa-solid fa-briefcase-medical"></i>
+            </div>
+            <span class="Company-Name" id="CompanyName">COMPANY NAME</span>
+        </div>
+        <ul id="underlist">
+            <li>Home
+             
+            </li>
+            <li>About 
+                 
+            </li>
+            <li>Service
+                 
+            </li>
+            <li>Contact
+            
+            </li>
+            <li class="Humberger-menu" id="Humberger">
+                <i class="fa-solid fa-bars"></i>
+                <!-- <i class="fa-solid fa-xmark"></i>s -->
+            </li>
+        </ul>
+    </nav>
+    <div class="hero-section">
+        <div class="display">
+            <div class="background"></div>
+          <div class="item1">
+              <h1>Travel</h1>
+            <h2>Insurance</h2>
+          </div>
+           <p>
+            Travel Insurance helps protct you from certain kinds of unexpected events that can occur before or during your trip .
+           </p>
+           <button class="Display-Btn">Read More</button>
+        </div>
+    </div>
+
+    <script>
+        const nav = document.querySelector('nav')
+        const leftSide = document.querySelector('.leftSide')
+        const ul = document.getElementById('underlist')
+        const underlist = document.querySelectorAll('#underlist li')
+        const Humberger = document.getElementById('Humberger')
+        const CancelMenu = document.querySelector('#Humberger i')
+        let Company_Name = "Madicare Dixoer"
+        const CompanyName = document.getElementById('CompanyName')
+        CompanyName.textContent = Company_Name ;
+
+        function OpenMenu(e){
+            const humberMenu = e.target
+            if(CancelMenu.classList.contains('fa-xmark')){
+                cancelBtn() ;
+                return
+            }
+            // console.log(e.target)
+            nav.style.height = "100%"
+            nav.style.zIndex = "100"
+            ul.style.flexDirection = "column"
+            ul.style.position = "absolute"
+            ul.style.top = '50%'
+            ul.style.left = "50%"
+            ul.style.transform = "translate(-50%,-50%)"
+            leftSide.style.display = "none"
+            CancelMenu.classList.remove('fa-bars')
+            CancelMenu.classList.add('fa-xmark')
+            underlist.forEach((li , index)=>{
+                li.style.display = "inline-block"
+                li.style.fontSize = '40px'
+                if(index == 4){
+                    li.style.order = '-1'                }
+            })
+        }
+        function cancelBtn(){
+           nav.style.removeProperty('height')
+            nav.style.removeProperty('zIndex')
+            ul.style.removeProperty('flex-direction')
+            ul.style.removeProperty('position')
+            ul.style.removeProperty('top')
+            ul.style.removeProperty('left')
+            ul.style.removeProperty('transform')
+            leftSide.style.removeProperty('display')
+            CancelMenu.classList.remove('fa-xmark')
+            CancelMenu.classList.add('fa-bars')
+            // alert('hallo coder')
+
+               underlist.forEach((li , index)=>{
+                li.style.removeProperty('display')
+                li.style.removeProperty('font-size')
+
+                if(index == 4){
+                    li.style.removeProperty('order')
+                } 
+        }) 
+    }
+        Humberger.addEventListener('click', OpenMenu)
+    </script>
+</body>
+</html>

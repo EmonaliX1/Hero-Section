@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --mainColor: rgb(45, 75, 58);
+    --secColor : white;
+    --paragraphColor : rgb(223, 222, 222);
+    --MainPadding: 10px;
+    --displayColor : rgb(18, 190, 243);
+    --Main2Color :rgba(15, 39, 26, 0.829);
+    
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+
+
+nav
+
+{   width: 100%;
+    position: absolute;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+     height: 75px;
+     display: flex;
+     padding: 0 20px;
+    justify-content: space-between;
+    background-color: var(--mainColor);
+    color: var(--secColor);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.backgroundImage{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-image: url(./sea.jpg);
+    /* overflow: hidden; */
+}
+
+nav .leftSide { 
+    display: flex;
+    align-items: center;
+}
+
+nav .leftSide .website-Logo{
+    font-size: 30px;
+    padding-right: 10px;
+    margin: 10px;
+}
+nav .leftSide .website-Logo i{
+    position: relative;
+    font-size: 30px;
+}
+nav .leftSide .website-Logo i::after{
+    position: absolute;
+    content: '';
+    right: -10px;
+    width: 3px;
+    height: 100%;
+    background-color: var(--secColor);
+}
+nav .leftSide span{
+    font-size: 16px;
+    /* font-style: italic; */
+    color: var(--paragraphColor);
+}
+
+nav  ul {
+    display: flex;
+    align-items: center;
+}
+nav ul li {
+    padding: 10px 20px;
+    list-style: none;
+    cursor: pointer;
+    font-weight:500;
+}
+
+
+nav ul li a  {
+    text-decoration: none;
+}
+
+nav ul  .Humberger-menu{
+    display:none;
+    font-size: 24px;
+}
+
+
+/* hero section display content star here */
+.hero-section{
+    border: 1px solid black;
+}
+
+.hero-section .display{
+    top: 25%;
+    left: 27%;
+    transform: translateX(-50%);
+    height: 80vh;
+    position: absolute;
+    width: 45%;
+    padding: 40px 70px  0px 40px;
+    border-radius: 4px;
+    background-color: var(--Main2Color);
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+
+.hero-section .display .item1{
+    line-height: .9;
+
+}
+
+.hero-section .display h1{
+    display: block;
+    color: var(--displayColor);
+    font-size: 90px;
+    font-weight: 550;
+}
+.hero-section .display h2{
+    font-weight: 450;
+    display: block;
+    font-size: 55px;
+    color: var(--secColor);
+}
+
+.hero-section .display p{
+    line-height: 1.3;
+    font-size: 25px;
+    margin: 40px 0px;
+    width: 100%;
+    color: var(--paragraphColor);
+}
+.hero-section .display .Display-Btn{
+    background-color: var(--secColor);
+    color: var(--Main2Color);
+    padding: 10px 30px;
+    border: 1px solid var(--mainColorColor);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media  screen and (max-width: 800px){
+    .leftSide{
+        /* border: 10px solid red; */
+        /* display: none !important; */
+    }
+    nav ul {
+        justify-content:end;
+        width: 100%;
+        /* border: 1px solid ; */
+    }
+    nav ul li {
+        display: none;
+    }
+    nav ul .Humberger-menu{
+        display: inline-block !important;
+    }
+}
+/* response for display  */
+@media  screen and (max-width: 900px){
+
+    .hero-section .display{
+    padding: 40px 40px  0px 40px  !important;
+    }
+    .hero-section .display h1{
+        font-size: 80px;
+    }
+    .hero-section .display h2{
+        font-size: 45px;
+    }
+    .hero-section p{
+        font-size: 20px ;
+        margin:30px 0px !important ;
+    }
+}
+
+@media  screen and (max-width: 750px){
+    .hero-section .display{
+    left: 250px;
+    width: 60% !important;
+    padding: 20px 20px  0px 20px  !important;
+
+    }
+}
+
+@media  screen and (max-width: 650px){
+    .hero-section .display{
+    left: 250px;
+    width: 65% !important;
+    padding: 20px 20px  0px 20px  !important;
+    }
+}
+
+@media  screen and (max-width: 550px){
+    .hero-section .display{
+    left: 200px;
+    width: 70% !important;
+    padding: 20px 20px  0px 20px  !important;
+    }
+}
+
+@media  screen and (max-width: 450px){
+    .hero-section .display{
+    left: 190px;
+    width: 80% !important;
+    padding: 20px 20px  0px 20px  !important;
+    }
+}
+
+@media  screen and (max-width: 350px){
+    .hero-section .display{
+    left: 150px;
+    width: 90% !important;
+    padding: 20px 20px  0px 20px  !important;
+    }
+}

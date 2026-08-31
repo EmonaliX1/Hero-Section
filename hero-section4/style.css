@@ -1,0 +1,235 @@
+:root{
+    --MainColor:rgba(23, 24, 24, 0.815) ;
+    --highLight : red ; 
+    --black : rgb(36, 35, 35) ;
+    --white : white;
+}
+
+*{
+    /* border: 1px solid red; */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body{
+    padding: 0px 70px;
+}
+
+nav{
+    margin: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav .logo{
+    display: flex;
+    gap:5px;
+    align-items: center;
+}
+
+nav .logo .icon{
+    font-size: 22px;
+    color: var(--MainColor);
+}
+
+nav .logo span{
+    color: var(--black);
+    font-weight: 600;
+    font-size: 22px;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+}
+nav ul li {
+    color: var(--black);
+    margin: 0px 15px;
+    padding: 10px 10px;
+    list-style: none;
+    transition: 100ms linear all;
+    /* background-color: orange; */
+    cursor: pointer  !important;
+    text-transform: uppercase;
+}
+
+nav ul li.drop_down{
+    /* border: 1px solid red; */
+    display:flex;
+    align-items: center;
+    gap: 10px;
+}
+
+nav ul li .icon i{ 
+    color: var(--black);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    /* font-size: 22px; */
+}
+nav ul li:hover{
+    font-weight: bolder;
+    color: var(--MainColor)  !important;
+}
+
+.contact_btn{
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    transition: 100ms linear all;
+    /* border: 1px solid red; */
+}
+
+.contact_btn li:hover{
+    color: var(--MainColors);
+    /* font-weight: bolder; */
+}
+
+
+.contact_btn li {
+    color: var(--black);
+    padding: 10px 5px;
+    font-size: 18px;
+    list-style: none;
+}
+
+.container{
+    z-index: -100;
+    position: relative;
+    border-radius: 40px;
+    overflow: hidden;
+    width: 100%;
+    /* aspect-ratio: 16/9; */
+    height: 85vh;
+    /* border: 1px solid green; */
+    background-image: 
+        radial-gradient( circle at bottom left , var(--MainColor), transparent 50%)
+        , url('https://images.pexels.com/photos/19443387/pexels-photo-19443387.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+.container .display{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px;
+}
+.container .display h1{
+    color: var(--white);
+    font-size: 45px;
+    line-height: 1.3;
+    font-weight: 900;
+    text-shadow: 2px 2px #555555;
+}
+
+.container .display p{
+    line-height: 1.3;
+    font-size: 14px;
+    margin: 10px 0 40px;
+    /* filter: blur(1px); */
+    width: 450px;
+    color: #f0eded;
+    p {
+  text-shadow: 2px 4px 5px rgba(0, 0, 0, 0.3);
+}
+
+}
+
+.container .Book_btn{
+    margin-bottom: 10px;
+}
+.container .Book_btn a {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-radius: 100px;
+    padding: 10px 30px;
+    color: black;
+    text-decoration: none;
+    background-color: var(--white);
+    border: 2px solid var(--white);
+    transition: 300ms linear all;
+    outline: 10px solid rgba(128, 128, 128, 0.199);
+}
+
+.Book_btn a:hover{
+    background-color:black;
+    color: white;
+}
+.Book_btn a  {
+    scale: 2;
+}
+.show{
+    padding: 10px 20px;
+    color: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    width:200px;
+    border: 2px solid rgba(141, 139, 139, 0.425);
+    bottom: 80px;
+    right: 50px;
+    position: absolute;
+    /* filter: 10px; */
+}
+.show .background{
+    /* filter: blur(100px);
+     */
+     backdrop-filter: blur(10px);
+     -webkit-backdrop-filter: blur(10px);
+    top: 0;
+    right: 0;
+    background-color: rgba(107, 105, 101, 0.301);
+    z-index: -51;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.show .text h3{
+    font-size: 22px;
+    font-weight: bolder;
+}
+.show .image {
+    align-items: center;
+    padding: 30px 0px;
+    /* border: 1px solid red; */
+    position: relative;
+    /* padding: 10px; */
+    display: flex;
+}
+.show .image img {
+    position: absolute;
+    border: 2px solid var(--white);
+    overflow: hidden;
+    width: 30px;
+    border-radius: 50%;
+}
+.show .image .img1{
+    z-index:-4
+}
+.show .image .img2{
+    /* top: 0px; */
+    left: 25px;
+    z-index:-3
+}
+
+.show .image .img3{
+    left: 50px;
+    z-index:-2
+}
+
+.show .image .img4{
+    left: 75px;
+    z-index:-1
+}
+
+
+.show .text p{
+    text-transform: capitalize;
+    font-size: 14px;
+    color: rgb(194, 190, 190);
+}
