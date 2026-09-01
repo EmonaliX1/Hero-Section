@@ -24,6 +24,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: var(--logo_Font_Family);
+    /* border: 1px solid red; */
 }
 
 body{
@@ -49,17 +50,31 @@ nav ul {
     display: flex;
 }
 nav ul li {
+    cursor: pointer;
     margin: 0px 10px ; 
     padding: 10px 10px;
     list-style: none;
-    
+    transition: 140ms linear all;
 }
 
 nav ul li a {
     text-decoration: none;
     color:var(--NavLinks_Color);
     font-weight: 400;
+    transition: 140ms linear all;
 }
+nav ul li:hover{
+    background-color: var(--h1_Color);
+    transform: translateY(-10px);
+    /* font-weight: 800;   it cause bug dont use font-weight in hover it 
+                            cause hover filicking or vibrate bug 
+    */
+}
+
+nav ul li:hover a {
+    color: white;
+}
+
 .nav_active_btn{
     display: flex;
     align-items: center;
@@ -74,6 +89,7 @@ nav ul li a {
     color: var(--Bg_Color);
 }
 section{
+    position: relative;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -120,4 +136,22 @@ section .Learn_More_btn{
     border: 1px solid  var(--para_Color)  !important;
     background-color: white !important;
     color: var(--NavLinks_Color) !important;
+}
+/* grate image / container right site imge coding  */
+
+section .image{
+    object-fit: cover;
+    bottom: 0;
+    right: 10px;
+    position: absolute;
+    width: 500px;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+section .image img {
+    width: 100%;
+    height: 100%;
 }
