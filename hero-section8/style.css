@@ -71,6 +71,7 @@ nav .logo  span{
     font-weight: 600;
 }
 
+
 nav .icon i:hover{
     transition: 300ms linear all;
     /* color: orangered; */
