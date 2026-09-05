@@ -25,6 +25,7 @@
 }
 
 body{
+    height: 160vh;
     padding: 40px 80px;
 }
 nav{
@@ -105,8 +106,9 @@ nav  .notactive{
 section{
     display: grid ;
     grid-template-rows: repeat(2,50%);
+    gap: 70px;
     /* border: 1px solid red; */
-    height: 100vh;
+    height: 110vh;
 }
 
 section  .top{
@@ -121,6 +123,7 @@ section  .top{
     left: 46%;
     transform: translate(-50% , -50%);
     position: absolute  ;
+    z-index: -1;
 }
 
 .center_line{
@@ -200,4 +203,101 @@ section .box1 .tag{
 
 section .bottom{
     /* border: 1px solid orangered; */
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    /* grid-template-rows: 1fr; */
+    grid-template-areas: 
+    "area1 area2 area2 area3"
+    ;
+    gap: 15px;
+}
+
+.item{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid  black; */
+    overflow: hidden;
+}
+
+.item .image{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.item  .image img{
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+.item1{
+    grid-area: area1;
+}
+
+.item2{
+    grid-area: area2;
+}
+
+.item3{
+    grid-area: area3;
+}
+
+.item .tagline {
+    position: absolute;
+    /* border: 1px solid whitesmoke; */
+    width: 100%;
+    color: white; 
+    /* filter: blur(10px); */
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.item .tagline {
+    padding: 15px 15px;
+}
+
+.item .icon{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    border: 1px solid white;
+    /* background-color:white; */
+    padding: 12px ;
+    border-radius: 50%;
+    scale: 1.1;
+    color: white;
+    cursor: pointer;
+    transition: 100ms linear all;
+}
+.item h3{
+    font-size: 16px;
+}
+.item p{
+    font-size: 12px;
+    color:rgb(202, 198, 198);
+}
+.tagline{
+    /* border: 1px solid red; */
+    bottom: 10px ;
+}
+
+.item2 .tagline{
+    padding: 10px 20px;
+    /* border: 1px solid red; */
+    top: 10px;
+    bottom: auto;
+}
+
+.item .icon:hover{
+    scale: 1.1;
+}
+
+.item .icon:active{
+    scale: .9
 }
