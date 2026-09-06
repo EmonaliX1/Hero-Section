@@ -242,7 +242,7 @@ section .item1{
 .card2{
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
-    z-index: 3;
+        transform: translateY(-70px);
 }
 
 .card3{
