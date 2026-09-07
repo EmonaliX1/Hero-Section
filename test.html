@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Rope Physics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #1a1a1a;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            display: block;
+            background: #121212;
+        }
+        .instruction {
+            position: absolute;
+            top: 20px;
+            color: #ffffff;
+            font-size: 18px;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-select: none;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="instruction">🖱️ মাউস দিয়ে দড়িটি ধরে টেনে দেখুন!</div>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // ক্যানভাসের সাইজ সেট করা
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // ফিজিক্সের প্যারামিটার (Physics Settings)
+        const gravity = 0.6;
+        const friction = 0.98;
+        const iterations = 10; // যত বেশি হবে, দড়ি তত শক্ত/বাস্তবসম্মত হবে
+
+        // পয়েন্ট (Point Class) - দড়ির প্রতিটি নোড
+        class Point {
+            constructor(x, y, pinned = false) {
+                this.x = x;
+                this.y = y;
+                this.oldx = x;
+                this.oldy = y;
+                this.pinned = pinned; // আটকানো কি না
+            }
+
+            update() {
+                if (this.pinned) return;
+
+                // আগের পজিশন থেকে গতি বের করা
+                const vx = (this.x - this.oldx) * friction;
+                const vy = (this.y - this.oldy) * friction;
+
+                this.oldx = this.x;
+                this.oldy = this.y;
+
+                // নতুন পজিশন হিসেব করা
+                this.x += vx;
+                this.y += vy + gravity;
+            }
+        }
+
+        // স্টিক (Stick Class) - দুটি পয়েন্টের মাঝের সংযোগ
+        class Stick {
+            constructor(p0, p1, length) {
+                this.p0 = p0;
+                this.p1 = p1;
+                this.length = length;
+            }
+
+            update() {
+                const dx = this.p1.x - this.p0.x;
+                const dy = this.p1.y - this.p0.y;
+                const distance = Math.hypot(dx, dy);
+                if (distance === 0) return;
+
+                const difference = this.length - distance;
+                const percent = difference / distance / 2;
+                const offsetX = dx * percent;
+                const offsetY = dy * percent;
+
+                // পয়েন্ট দুটিকে নির্দিষ্ট দূরত্বে ধরে রাখা
+                if (!this.p0.pinned) {
+                    this.p0.x -= offsetX;
+                    this.p0.y -= offsetY;
+                }
+                if (!this.p1.pinned) {
+                    this.p1.x += offsetX;
+                    this.p1.y += offsetY;
+                }
+            }
+        }
+
+        // দড়ি তৈরি করা (Creating the Rope)
+        const points = [];
+        const sticks = [];
+        const totalSegments = 35; // দড়ির জয়েন্ট সংখ্যা
+        const segmentLength = 12; // প্রতিটি জয়েন্টের দৈর্ঘ্য
+        const startX = canvas.width / 2;
+        const startY = 80;
+
+        for (let i = 0; i < totalSegments; i++) {
+            const isPinned = (i === 0); // একদম উপরের পয়েন্টটি ফিক্সড থাকবে
+            points.push(new Point(startX, startY + (i * segmentLength), isPinned));
+        }
+
+        for (let i = 0; i < totalSegments - 1; i++) {
+            sticks.push(new Stick(points[i], points[i + 1], segmentLength));
+        }
+
+        // মাউস দিয়ে দড়ি ড্র্যাগ করার সিস্টেম (Mouse Interaction)
+        let draggedPoint = null;
+        const mouse = { x: 0, y: 0 };
+
+        canvas.addEventListener('mousedown', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+
+            // মাউসের কাছের পয়েন্টটি খুঁজে বের করা
+            let minDist = 30; // মাউস থেকে ধরার ব্যাসার্ধ (Radius)
+            points.forEach(p => {
+                const dist = Math.hypot(p.x - mouse.x, p.y - mouse.y);
+                if (dist < minDist) {
+                    minDist = dist;
+                    draggedPoint = p;
+                }
+            });
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+
+            if (draggedPoint) {
+                draggedPoint.x = mouse.x;
+                draggedPoint.y = mouse.y;
+                draggedPoint.oldx = mouse.x;
+                draggedPoint.oldy = mouse.y;
+            }
+        });
+
+        window.addEventListener('mouseup', () => {
+            draggedPoint = null;
+        });
+
+        // অ্যানিমেশন লুপ (Render & Animation Loop)
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // ১. পয়েন্টের পজিশন আপডেট
+            points.forEach(p => p.update());
+
+            // ২. দড়ির টান সামঞ্জস্য করা (Multiple iterations for stiffness)
+            for (let i = 0; i < iterations; i++) {
+                sticks.forEach(s => s.update());
+            }
+
+            // ৩. দড়ি আঁকা (Render Rope)
+            ctx.beginPath();
+            ctx.lineWidth = 6;
+            ctx.strokeStyle = '#d4a373'; // দড়ির কালার (Rope Color)
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            ctx.moveTo(points[0].x, points[0].y);
+            for (let i = 1; i < points.length; i++) {
+                ctx.lineTo(points[i].x, points[i].y);
+            }
+            ctx.stroke();
+
+            // ৪. উপরে ঝোলানোর পিন আঁকা (Anchor Pin)
+            ctx.beginPath();
+            ctx.arc(points[0].x, points[0].y, 8, 0, Math.PI * 2);
+            ctx.fillStyle = '#e74c3c';
+            ctx.fill();
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
