@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+.humber_icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.three_line{
+    cursor: pointer;
+    /* border: 1px solid gray; */
+    padding: 50px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: -10px -10px  20px rgb(238, 233, 233) ,
+                            5px 5px 10px rgba(45, 41, 34, 0.255)  ;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.line{
+    /* border: 1px solid red; */
+    width: 150px;
+    height: 15px;
+    background-color: blueviolet;
+    border-radius: 100px;
+    transition:100ms linear all;
+}
+
+.three_line:hover :nth-child(1){
+    /* rotate: 60deg; */
+    transform: translateY(40px) rotate(45deg);
+  background-color: blueviolet !important;
+}
+
+.three_line:hover :nth-child(2){
+    transform: translateX(200px);
+
+}
+
+.three_line:hover :nth-child(3){
+    transform: translateY(-40px) rotate(-45deg);
+  background-color: blueviolet !important;
+
+
+}
