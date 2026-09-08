@@ -1,0 +1,31 @@
+@media (max-width: 750px){
+    nav ul{
+        width: 100%;
+        top: 90px;
+        left: 0px;
+        position: fixed;
+        display: none;
+        background-color: rgba(12, 99, 162, 0.233);
+        backdrop-filter: blur(20px);
+       -webkit-backdrop-filter: blur(100px);
+       border-bottom: 1px solid rgba(130, 124, 124, 0.414);
+       /* border: 1px solid ; */
+
+        /* display: none !important; */
+    }
+    nav ul li {
+        padding: 15px 10px;
+    }
+    nav .logo{
+        font-size: 2rem;
+    }
+    nav .humber_menu{
+        display: block;
+    }
+    nav ul li a {
+        font-size: 1.2rem;
+    }
+}
+@media (min-width: 750px){
+
+}
